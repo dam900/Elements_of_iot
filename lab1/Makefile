@@ -10,3 +10,6 @@ build:
 run: build
 	@echo "Running ./build.out" 
 	@./build.out
+
+clean:
+	@rm Dog.so build.out
