@@ -14,15 +14,15 @@ int main() {
     }
 
     // Get the function pointer to the factory function
-    CreateAnimalFn createDog = reinterpret_cast<CreateAnimalFn>(dlsym(handle, "create_dog"));
-    if (!createDog) {
+    CreateAnimalFn createAnimal = reinterpret_cast<CreateAnimalFn>(dlsym(handle, "create_animal"));
+    if (!createAnimal) {
         std::cerr << "Failed to get the factory function: " << dlerror() << std::endl;
         dlclose(handle);
         return 1;
     }
 
     // Create Animal object using factory function from shared library
-    Animal* animal = createDog();
+    Animal* animal = createAnimal();
     if (!animal) {
         std::cerr << "Failed to create the Animal object." << std::endl;
         dlclose(handle);

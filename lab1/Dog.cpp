@@ -9,7 +9,7 @@ public:
 };
 
 extern "C" {
-    Animal* create_dog() {
+    Animal* create_animal() {
         return new Dog();
     }
 }
