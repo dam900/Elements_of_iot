@@ -10,13 +10,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     while True:
         sock.listen(1)
         conn, addr = sock.accept()
-        
         with conn:
             start = time.time()
             while True:
                 data = conn.recv(1024)
                 if not data:
                     break
-                conn.sendall(data)
             end = time.time()
-            print("Time taken: ", end-start)
+            print(f"Time taken: {end-start:.40f}")

@@ -13,9 +13,7 @@ if __name__ == "__main__":
     files = {'file': (file_name, file_bytes)}
 
     start = time.time()
-    
     response = requests.post(URL, files=files)
-    
     end = time.time()
     utils.remove_file(file_name)
     
