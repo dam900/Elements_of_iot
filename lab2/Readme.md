@@ -3,7 +3,7 @@ Markdown
 
 | Rozmiar pliku (bajty) | UDP | TCP | HTTP |
 |---|---|---|---|
-| 10^0 | 0.012 MB/s | 0.013 MB/s | 0.011 MB/s |
+| 2^1 | 0.012 MB/s | 0.013 MB/s | 0.011 MB/s |
 | 2^5 | 0.102 MB/s | 0.110 MB/s | 0.098 MB/s |
 | 2^10 | 1.01 MB/s | 1.12 MB/s | 0.99 MB/s |
 | 2^20 | 10.2 MB/s | 11.3 MB/s | 10.0 MB/s |
