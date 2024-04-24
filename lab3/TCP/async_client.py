@@ -1,6 +1,5 @@
-import socket
+import asyncio
 import random
-import threading
 from typing import List
 
 HOST = "localhost"
@@ -28,7 +27,7 @@ Wyzłacanych pszenicą, posrebrzanych żytem;
 Gdzie bursztynowy świerzop, gryka jak śnieg biała,
 Gdzie panieńskim rumieńcem dzięcielina pała,
 A wszystko przepasane jakby wstęgą, miedzą
-Zieloną, na niej zrzadka ciche grusze siedzą. 
+Zieloną, na niej zrzadka ciche grusze siedzą.
 """
 
 wiersz_array = wiersz.replace("\n", " ").split(" ")
@@ -42,21 +41,16 @@ chunks = [
 ]
 
 
-def send_chunk(chunk: List[str]):
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((HOST, PORT))
-        for pair in chunk:
-            s.sendall(bytes(str(f"|{pair}"), "utf-8"))
+async def tcp_echo_client(message):
+    _, writer = await asyncio.open_connection(HOST, PORT)
+
+    for pair in message:
+        writer.write(f"|{pair}".encode("utf-8"))
+
+    print("Closing the connection")
+    writer.close()
+    await writer.wait_closed()
 
 
-if __name__ == "__main__":
-    threads = []
-    for chunk in chunks:
-        t = threading.Thread(target=send_chunk, args=(chunk,))
-        threads.append(t)
-        t.start()
-        print("Thread started: ", chunks.index(chunk))
-    print("All threads started")
-    for t in threads:
-        t.join()
-    print("All threads finished")
+for chunk in chunks:
+    asyncio.run(tcp_echo_client(chunk))
