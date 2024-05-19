@@ -8,7 +8,7 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 
-KEY_SIZE = 2048
+KEY_SIZE = 2048 // 1
 
 
 def generate_keys():
